@@ -3,8 +3,8 @@
 YouTube Transcript Summarizer
 
 A command-line tool that:
-1. Accepts a shortened YouTube URL as input
-2. Downloads the video transcript from DownSub.com
+1. Accepts a YouTube URL as input
+2. Downloads the video transcript using youtube-transcript-api
 3. Summarizes the transcript using OpenRouter API
 4. Saves the summary as a Markdown file
 """
@@ -64,7 +64,7 @@ def main():
     
     if not transcript:
         logger.error("Failed to download transcript")
-        print("Error: Failed to download transcript. The video might not have subtitles or DownSub might be unavailable.")
+        print("Error: Failed to download transcript. The video might not have subtitles available.")
         return 1
     
     logger.info(f"Successfully downloaded transcript ({len(transcript)} characters)")

@@ -44,11 +44,12 @@ class TranscriptSummarizer:
         messages = [
             {
                 "role": "system",
-                "content": "You are a helpful assistant that summarizes video transcripts. Create a concise summary that captures the main points and key information from the transcript. The summary should be well-structured and informative."
+                "content": "You are a helpful assistant that summarizes video transcripts. Create a concise summary in Japanese that captures the main points and key information from the transcript. The summary should be well-structured and informative."
             },
             {
                 "role": "user",
-                "content": f"Please summarize the following video transcript in 3-5 paragraphs:\n\n{transcript}"
+                #"content": f"Please summarize the following video transcript in 3-5 paragraphs:\n\n{transcript}"
+                "content": f"この動画スクリプトをわかりやすく、網羅的に要約してください paragraphs:\n\n{transcript}"
             }
         ]
         

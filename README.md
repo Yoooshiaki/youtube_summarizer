@@ -1,11 +1,11 @@
 # YouTube Transcript Summarizer
 
-A command-line tool that takes a shortened YouTube URL, downloads the video transcript using DownSub, summarizes it with a Large Language Model (LLM), and outputs the result as a Markdown (.md) file.
+A command-line tool that takes a YouTube URL, downloads the video transcript using youtube-transcript-api, summarizes it with a Large Language Model (LLM), and outputs the result as a Markdown (.md) file.
 
 ## Features
 
-- Accepts shortened YouTube URLs (e.g., `https://youtu.be/VIDEO_ID`)
-- Downloads video transcripts from DownSub.com
+- Accepts YouTube URLs (both shortened `youtu.be` and standard `youtube.com` formats)
+- Downloads video transcripts directly from YouTube using youtube-transcript-api
 - Summarizes transcripts using OpenRouter API
 - Saves summaries as Markdown files with metadata
 - Supports multiple languages (defaults to English)
@@ -19,6 +19,7 @@ A command-line tool that takes a shortened YouTube URL, downloads the video tran
   - beautifulsoup4
   - openrouter
   - python-dotenv
+  - youtube-transcript-api
 
 ## Installation
 
@@ -28,12 +29,18 @@ A command-line tool that takes a shortened YouTube URL, downloads the video tran
    cd youtube_summariser
    ```
 
-2. Install the required packages:
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install the required packages:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Create a `.env` file with your OpenRouter API key:
+4. Create a `.env` file with your OpenRouter API key:
    ```
    OPENROUTER_API_KEY=your_api_key_here
    OPENROUTER_MODEL=openai/gpt-3.5-turbo
@@ -44,6 +51,14 @@ A command-line tool that takes a shortened YouTube URL, downloads the video tran
 ## Usage
 
 ### Basic Usage
+
+Make sure your virtual environment is activated:
+
+```bash
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+Then run the script:
 
 ```bash
 python youtube_summarizer.py https://youtu.be/dQw4w9WgXcQ
@@ -90,17 +105,24 @@ The tool generates a Markdown file with the following structure:
 
 ## Testing
 
-Run the test script to verify the functionality:
+Make sure your virtual environment is activated, then run the test script to verify the functionality:
 
 ```bash
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 python tests/test_summarizer.py
+```
+
+You can also run a simple test to check if the youtube-transcript-api is working correctly:
+
+```bash
+python test_youtube_api.py
 ```
 
 ## Troubleshooting
 
 - **API Key Issues**: Ensure your OpenRouter API key is correctly set in the `.env` file.
-- **Transcript Download Failures**: Some videos may not have transcripts available, or DownSub might be temporarily unavailable.
-- **Rate Limiting**: If you encounter rate limiting from DownSub or the LLM API, try again later.
+- **Transcript Download Failures**: Some videos may not have transcripts available or have disabled transcripts.
+- **Rate Limiting**: If you encounter rate limiting from the YouTube API or the LLM API, try again later.
 
 ## License
 
@@ -108,5 +130,5 @@ python tests/test_summarizer.py
 
 ## Acknowledgements
 
-- [DownSub](https://downsub.com/) for providing transcript downloads
+- [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api) for providing access to YouTube transcripts
 - [OpenRouter](https://openrouter.ai/) for the LLM API
